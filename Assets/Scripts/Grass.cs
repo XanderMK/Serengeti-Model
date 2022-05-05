@@ -6,7 +6,7 @@ public class Grass : MonoBehaviour
 {
     [SerializeField] private float growthSpeed;
     [SerializeField] private float rainGrowthMultiplier; 
-    public float growth = 0f;
+    float growth = 0f;
     public bool isBeingRainedOn = false;
     public bool isOnFire = false;
 
