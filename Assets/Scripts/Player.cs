@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     {
         transform.localEulerAngles = new Vector3(lookX, lookY, 0f);
 
-        cc.Move((transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed * Time.deltaTime - Vector3.up);
+        cc.Move((transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed * Time.deltaTime + Vector3.up * upDownInput * moveSpeed * Time.deltaTime);
     }
 
     void OnMove(InputValue value) {

@@ -2,42 +2,14 @@
     "name": "Player",
     "maps": [
         {
-            "name": "2D",
-            "id": "6f7e850f-7a9f-44b1-948c-b2c53b179dcd",
+            "name": "Player",
+            "id": "13b2aabe-1ca5-4580-b773-b85984fdc9b0",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "abc7b0f5-58ee-4f68-9e4f-cffb65541490",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "ab5ab4b0-c783-4cb3-84da-9b31f0e1cb15",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "3D",
-            "id": "76d1460b-8db2-4ef4-8507-c6f2767a3387",
-            "actions": [
-                {
-                    "name": "Move",
+                    "name": "MoveUpAndDown",
                     "type": "Value",
-                    "id": "507c0441-2e79-4f65-a951-c870db1042e8",
-                    "expectedControlType": "Vector2",
+                    "id": "54089bd8-5c2f-4644-95c0-3a3abd6049db",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -45,17 +17,17 @@
                 {
                     "name": "Look",
                     "type": "Value",
-                    "id": "8a95e0b2-5905-421d-a393-2f16c5f0f78d",
+                    "id": "4563e848-bfd7-4f49-9365-a3341d92f1c0",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MoveUpAndDown",
+                    "name": "Move",
                     "type": "Value",
-                    "id": "6ffc4feb-966f-49cc-bd4b-133359b5655e",
-                    "expectedControlType": "Axis",
+                    "id": "8909b8fe-d828-431d-a6b7-403089a309de",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -64,7 +36,7 @@
             "bindings": [
                 {
                     "name": "WASD",
-                    "id": "a0b8aa5d-ff90-4022-b9af-163c32aeb848",
+                    "id": "d79123da-5a66-4fa9-8069-28ab49f6bc60",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -75,7 +47,7 @@
                 },
                 {
                     "name": "up",
-                    "id": "0c14fc76-ea7c-4107-b8c5-e59c1cf9d092",
+                    "id": "ca83fa31-62c0-42bc-9218-80408abd9099",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -86,7 +58,7 @@
                 },
                 {
                     "name": "down",
-                    "id": "0d4e6198-e4a4-4b87-80f0-11624b05a1e2",
+                    "id": "cb663881-a95b-4647-a1b3-52974f9c0d9e",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -97,7 +69,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "c24d3992-705e-41f6-a5ea-96c9d393e30c",
+                    "id": "69097041-b1e8-4770-8ba0-d15d029b8cb8",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -108,7 +80,7 @@
                 },
                 {
                     "name": "right",
-                    "id": "b0b9d2f1-7eb9-41ac-9233-b424c5db1af2",
+                    "id": "5996ea5b-81a6-4a1d-a366-8a94b5e03c52",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -119,7 +91,7 @@
                 },
                 {
                     "name": "",
-                    "id": "de1d793f-3396-4506-a1a4-17f48dd5cfc2",
+                    "id": "e92f706b-d3a0-49fb-ae43-66fee39f9668",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
@@ -130,7 +102,7 @@
                 },
                 {
                     "name": "Space/Shift",
-                    "id": "655cc392-65fb-4c54-9704-530c675d110a",
+                    "id": "3e3c6983-3dd6-4775-bb59-fd0198780e07",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
@@ -141,7 +113,7 @@
                 },
                 {
                     "name": "negative",
-                    "id": "453547f5-972f-4a4b-84f0-f1d1cc9754e1",
+                    "id": "c7d0f7c2-315c-4676-9a7d-9ea65f9af014",
                     "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
@@ -152,7 +124,7 @@
                 },
                 {
                     "name": "positive",
-                    "id": "aa48f9d3-c30f-4ced-b427-a0ca52785701",
+                    "id": "324562be-ac48-4470-86cc-8dd7f1b1e688",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
@@ -162,6 +134,22 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "InUI",
+            "id": "c814b442-4c5a-4a90-be23-34df7d691289",
+            "actions": [
+                {
+                    "name": "is empty :)",
+                    "type": "Button",
+                    "id": "4ed5dbc4-07d2-42c6-a39a-1a569ddb3981",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": []
         }
     ],
     "controlSchemes": []
