@@ -8,9 +8,12 @@ public class Player : MonoBehaviour
 
     public CharacterController cc;
 
-    [Header("3D Attributes")]
+    [Header("Attributes")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float camSensitivity;
+
+    [Header("Other")]
+    [SerializeField] private float simSpeed;
 
     Vector2 moveInput;
     float upDownInput;
@@ -25,6 +28,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (simSpeed != Time.timeScale)
+            Time.timeScale = simSpeed;
+
         transform.localEulerAngles = new Vector3(lookX, lookY, 0f);
 
         cc.Move((transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed * Time.deltaTime + Vector3.up * upDownInput * moveSpeed * Time.deltaTime);

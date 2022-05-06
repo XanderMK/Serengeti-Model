@@ -10,10 +10,13 @@ public class GrassManager : MonoBehaviour
     public GameObject grassPrefab;
 
     Transform[,] grass;
+    Transform player;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
+        player = Camera.main.transform;
+
         grass = new Transform[arrayWidth, arrayHeight];
 
         for (int i = 0; i < arrayWidth; i++) {
@@ -26,5 +29,32 @@ public class GrassManager : MonoBehaviour
         }
 
         transform.position = new Vector3(-arrayWidth/2, 0f, -arrayHeight/2);
+
+        StartCoroutine(FakeUpdate());
+    }
+
+    void OnDisable() {
+        for (int i = 0; i < arrayWidth; i++) {
+            for (int j = 0; j < arrayHeight; j++) {
+                Destroy(grass[i, j].gameObject);
+            }
+        }
+        grass = null;
+    }
+
+    IEnumerator FakeUpdate() {
+        while (true) {
+            for (int i = 0; i < arrayWidth; i++) {
+                for (int j = 0; j < arrayHeight; j++) {
+                    Transform grassObj = grass[i, j];
+                    grassObj.LookAt(new Vector3(player.position.x, grassObj.position.y, player.position.z));
+                    grassObj.Rotate(Vector3.up * 180f);
+                    grassObj.localPosition = new Vector3(grassObj.localPosition.x, (grassObj.GetComponent<Grass>().growth/100f)-0.5f, grassObj.localPosition.z);
+                    grassObj.GetComponent<SphereCollider>().center = Vector3.up * (((100f-grassObj.GetComponent<Grass>().growth)/100)+0.5f);
+                }
+            }
+            yield return new WaitForSecondsRealtime(0.1f);
+        }
+        
     }
 }

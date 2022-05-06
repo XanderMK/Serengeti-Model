@@ -6,31 +6,28 @@ public class Grass : MonoBehaviour
 {
     private readonly float growthSpeed = 1f;
     private readonly float rainGrowthMultiplier = 2f; 
-    float growth = 35f;
+    public float growth = 60;
     public bool isBeingRainedOn = false;
     public bool isOnFire = false;
 
-    Transform player;
-    SphereCollider col;
+    public SphereCollider col;
 
     void Awake() {
-        player = GameObject.Find("Main Camera").transform;
         col = gameObject.GetComponent<SphereCollider>();
+
+        StartCoroutine(Grow());
     }
 
-    void FixedUpdate() {
-        growth += growthSpeed * Time.fixedDeltaTime;
+    IEnumerator Grow() {
+        while (true) {
+            growth += growthSpeed * 0.1f;
+            growth = Mathf.Clamp(growth, 0f, 100f);
 
-        growth = Mathf.Clamp(growth, 0f, 100f);
-
-        transform.localPosition = new Vector3(transform.localPosition.x, (growth/100f)-0.5f, transform.localPosition.z);
-
-        col.center = Vector3.up * (((100f-growth)/100)+0.5f);
-
-        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
-    public int GiveFood(int amount) {
+    public float GiveFood(int amount) {
         int amountToReturn = 0;
         if (amount >= growth) {
             amountToReturn = Mathf.FloorToInt(growth);
@@ -40,6 +37,6 @@ public class Grass : MonoBehaviour
             growth -= amount;
         }
 
-        return amountToReturn;
+        return amountToReturn/10f;
     }
 }
