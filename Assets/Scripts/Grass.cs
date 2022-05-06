@@ -4,33 +4,36 @@ using UnityEngine;
 
 public class Grass : MonoBehaviour
 {
-    [SerializeField] private float growthSpeed;
-    [SerializeField] private float rainGrowthMultiplier; 
-    float growth = 0f;
+    private readonly float growthSpeed = 1f;
+    private readonly float rainGrowthMultiplier = 2f; 
+    float growth = 35f;
     public bool isBeingRainedOn = false;
     public bool isOnFire = false;
 
     Transform player;
+    SphereCollider col;
 
     void Awake() {
         player = GameObject.Find("Main Camera").transform;
+        col = gameObject.GetComponent<SphereCollider>();
     }
 
     void FixedUpdate() {
         growth += growthSpeed * Time.fixedDeltaTime;
-        if (growth > 100) {
-            growth = 100;
-        }
+
+        growth = Mathf.Clamp(growth, 0f, 100f);
 
         transform.localPosition = new Vector3(transform.localPosition.x, (growth/100f)-0.5f, transform.localPosition.z);
 
-        transform.LookAt(player);
+        col.center = Vector3.up * (((100f-growth)/100)+0.5f);
+
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
     }
 
     public int GiveFood(int amount) {
         int amountToReturn = 0;
         if (amount >= growth) {
-            amountToReturn = (int)growth;
+            amountToReturn = Mathf.FloorToInt(growth);
             growth = 0f;
         } else {
             amountToReturn = amount;

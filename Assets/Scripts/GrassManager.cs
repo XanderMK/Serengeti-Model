@@ -14,8 +14,6 @@ public class GrassManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(-arrayWidth, 0f, -arrayHeight);
-
         grass = new Transform[arrayWidth, arrayHeight];
 
         for (int i = 0; i < arrayWidth; i++) {
@@ -26,5 +24,7 @@ public class GrassManager : MonoBehaviour
                 grass[i, j].SetParent(transform);
             }
         }
+
+        transform.position = new Vector3(-arrayWidth/2, 0f, -arrayHeight/2);
     }
 }
