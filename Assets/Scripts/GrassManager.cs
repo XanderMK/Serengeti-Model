@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class GrassManager : MonoBehaviour
 {
-    [SerializeField] private int arrayWidth;
-    [SerializeField] private int arrayHeight;
+    public readonly int arrayWidth = 100;
+    public readonly int arrayHeight = 50;
 
     public GameObject grassPrefab;
+    public Material normalGrass;
+    public Material grassOnFire;
 
-    Transform[,] grass;
+    public Transform[,] grass;
     Transform player;
 
     // Start is called before the first frame update
@@ -21,10 +23,11 @@ public class GrassManager : MonoBehaviour
 
         for (int i = 0; i < arrayWidth; i++) {
             for (int j = 0; j < arrayHeight; j++) {
-                grass[i, j] = Instantiate(grassPrefab).transform;
-                grass[i, j].localPosition = new Vector3(i, -0.5f, j);
-                grass[i, j].gameObject.name = "Grass: " + i + ", " + j;
-                grass[i, j].SetParent(transform);
+                Transform grassObj = Instantiate(grassPrefab).transform;
+                grassObj.localPosition = new Vector3(i, -0.5f, j);
+                grassObj.gameObject.name = "Grass: " + i + ", " + j;
+                grassObj.SetParent(transform);
+                grass[i, j] = grassObj;
             }
         }
 
@@ -53,7 +56,7 @@ public class GrassManager : MonoBehaviour
                     grassObj.GetComponent<SphereCollider>().center = Vector3.up * (((100f-grassObj.GetComponent<Grass>().growth)/100)+0.5f);
                 }
             }
-            yield return new WaitForSecondsRealtime(0.1f);
+            yield return new WaitForSecondsRealtime(0.2f);
         }
         
     }

@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ToggleMenu",
+                    "type": "Button",
+                    "id": "cfb3fac8-3487-40dc-94e5-f18bb3e4abdd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -132,24 +141,19 @@
                     "action": "MoveUpAndDown",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "806e534f-1afe-4dc4-a0f1-2c63498406b0",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "InUI",
-            "id": "c814b442-4c5a-4a90-be23-34df7d691289",
-            "actions": [
-                {
-                    "name": "is empty :)",
-                    "type": "Button",
-                    "id": "4ed5dbc4-07d2-42c6-a39a-1a569ddb3981",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": []
         }
     ],
     "controlSchemes": []

@@ -12,28 +12,27 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float camSensitivity;
 
-    [Header("Other")]
-    [SerializeField] private float simSpeed;
-
     Vector2 moveInput;
     float upDownInput;
 
     float lookX;
     float lookY;
 
+    bool isInMenu = false;
+
+    public GameObject menu;
+
     void Start()
     {
         cc = gameObject.GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        if (simSpeed != Time.timeScale)
-            Time.timeScale = simSpeed;
-
         transform.localEulerAngles = new Vector3(lookX, lookY, 0f);
 
-        cc.Move((transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed * Time.deltaTime + Vector3.up * upDownInput * moveSpeed * Time.deltaTime);
+        cc.Move((transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed * (Time.deltaTime/Time.timeScale) + Vector3.up * upDownInput * moveSpeed * (Time.deltaTime/Time.timeScale));
     }
 
     void OnMove(InputValue value) {
@@ -41,15 +40,32 @@ public class Player : MonoBehaviour
     }
 
     void OnLook(InputValue value) {
-        Vector2 input = value.Get<Vector2>();
+        if (!isInMenu)
+        {
+            Vector2 input = value.Get<Vector2>();
 
-        lookX -= input.y * camSensitivity; // Vertical rotation
-        lookY += input.x * camSensitivity; // Horizontal rotation
+            lookX -= input.y * camSensitivity; // Vertical rotation
+            lookY += input.x * camSensitivity; // Horizontal rotation
 
-        lookX = Mathf.Clamp(lookX, -90f, 90f);
+            lookX = Mathf.Clamp(lookX, -90f, 90f);
+        }
     }
 
     void OnMoveUpAndDown(InputValue value) {
         upDownInput = value.Get<float>();
+    }
+
+    void OnToggleMenu()
+    {
+        isInMenu = !isInMenu;
+        if (isInMenu)
+        {
+            menu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+        } else
+        {
+            menu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }
