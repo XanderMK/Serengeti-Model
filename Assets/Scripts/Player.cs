@@ -30,9 +30,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        transform.localEulerAngles = new Vector3(lookX, lookY, 0f);
+        if (!isInMenu) {
+            transform.localEulerAngles = new Vector3(lookX, lookY, 0f);
 
-        cc.Move((transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed * (Time.deltaTime/Time.timeScale) + Vector3.up * upDownInput * moveSpeed * (Time.deltaTime/Time.timeScale));
+            cc.Move((transform.forward * moveInput.y + transform.right * moveInput.x).normalized * moveSpeed * (Time.deltaTime/Time.timeScale) + Vector3.up * upDownInput * moveSpeed * (Time.deltaTime/Time.timeScale));
+        }
     }
 
     void OnMove(InputValue value) {

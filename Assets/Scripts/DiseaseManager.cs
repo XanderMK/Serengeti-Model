@@ -21,11 +21,11 @@ public class DiseaseManager : MonoBehaviour
     {
         while (true)
         {
-            if (!vaccinated && Random.Range(0, 100) < diseaseSpeed)
+            if (!vaccinated && Random.Range(0, 25) < diseaseSpeed)
             {
-                Instantiate(diseasePrefab, new Vector3(50f, 0.5f, Random.Range(-25, 25)), Quaternion.identity);
+                Instantiate(diseasePrefab, new Vector3(50f, 0.5f, Random.Range(-25, 25)), Quaternion.identity).transform.SetParent(transform);
             }
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.2f);
         }
         
     }

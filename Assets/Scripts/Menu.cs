@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -12,6 +13,7 @@ public class Menu : MonoBehaviour
     public TMP_InputField initialBuffaloText;
     public TMP_InputField initialWildebeestText;
     public TMP_InputField initialTreesText;
+    public Toggle vaccinated;
 
     float timeScale = 1f;
 
@@ -20,6 +22,7 @@ public class Menu : MonoBehaviour
         initialBuffaloText.text = PlayerPrefs.GetInt("initialBuffalo").ToString();
         initialWildebeestText.text = PlayerPrefs.GetInt("initialWildebeest").ToString();
         initialTreesText.text = PlayerPrefs.GetInt("initialTrees").ToString();
+        vaccinated.isOn = PlayerPrefs.GetInt("vaccinated")==1?true:false;
     }
 
     public void UpdateTimeScale(float scale)
@@ -30,6 +33,7 @@ public class Menu : MonoBehaviour
 
     public void UpdateVaccination(bool vaccinated)
     {
+        PlayerPrefs.SetInt("vaccinated", vaccinated?1:0);
         diseaseManager.vaccinated = vaccinated;
     }
 
@@ -60,6 +64,7 @@ public class Menu : MonoBehaviour
 
     public void Reload()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 }

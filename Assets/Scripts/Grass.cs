@@ -11,9 +11,11 @@ public class Grass : MonoBehaviour
     public bool isOnFire = false;
 
     public SphereCollider col;
+    public float growthBeforeAte = 60f;
 
     void Awake() {
         growth = 60f;
+        growthBeforeAte = 60f;
 
         col = gameObject.GetComponent<SphereCollider>();
 
@@ -23,7 +25,7 @@ public class Grass : MonoBehaviour
     IEnumerator Grow() {
         while (true) {
             // LOTS OF FIRE LOGIC
-            if (Random.Range(0, 500000) == 0)
+            if (Random.Range(0, 1000000) == 0)
             {
                 isOnFire = true;
             }
@@ -34,7 +36,7 @@ public class Grass : MonoBehaviour
                 if (Random.Range(0, 40) == 0)
                 {
                     int borderingGrass = Random.Range(0, 4);
-                    if (borderingGrass == 0 && transform.localPosition.x > 1) // Grass to the left of this one gets set on fire
+                    if (borderingGrass == 0 && transform.localPosition.x > 0) // Grass to the left of this one gets set on fire
                     {
                         transform.parent.GetComponent<GrassManager>().grass[(int)transform.localPosition.x-1, (int)transform.localPosition.z].GetComponent<Grass>().isOnFire = true;
                     } else if (borderingGrass == 1 && transform.localPosition.z < 49) // Grass to the north of this one gets set on fire
@@ -43,7 +45,7 @@ public class Grass : MonoBehaviour
                     } else if (borderingGrass == 2 && transform.localPosition.x < 99) // Grass to the right of this one gets set on fire
                     {
                         transform.parent.GetComponent<GrassManager>().grass[(int)transform.localPosition.x+1, (int)transform.localPosition.z].GetComponent<Grass>().isOnFire = true;
-                    } else if (borderingGrass == 3 && transform.localPosition.z > 1) // Grass to the south of this one gets set on fire
+                    } else if (borderingGrass == 3 && transform.localPosition.z > 0) // Grass to the south of this one gets set on fire
                     {
                         transform.parent.GetComponent<GrassManager>().grass[(int)transform.localPosition.x, (int)transform.localPosition.z-1].GetComponent<Grass>().isOnFire = true;
                     }
@@ -70,6 +72,7 @@ public class Grass : MonoBehaviour
 
     public float GiveFood(int amount) {
         int amountToReturn = 0;
+        growthBeforeAte = growth;
         if (amount >= growth) {
             amountToReturn = Mathf.FloorToInt(growth);
             growth = 0f;
@@ -77,7 +80,6 @@ public class Grass : MonoBehaviour
             amountToReturn = amount;
             growth -= amount;
         }
-
         return amountToReturn/10f;
     }
 }

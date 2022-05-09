@@ -7,8 +7,8 @@ public class Wildebeest : MonoBehaviour
     private readonly float moveSpeed = 1.75f;
     private readonly float ageToReproduce = 60f;
     private readonly float energyToReproduce = 100f;
-    private readonly float minEnergyToStayAlive = 10f;
-    private readonly float energyDepletionRate = 5f;
+    private readonly float minEnergyToStayAlive = 0f;
+    private readonly float energyDepletionRate = 12f;
 
     float timeAlive;
     float energy = 50f;
@@ -68,7 +68,7 @@ public class Wildebeest : MonoBehaviour
                 timeSinceSick += 0.1f;
                 if (timeSinceSick >= timeUntilDieFromSickness)
                 {
-                    if (!(Random.Range(0, 40) == 0))
+                    if (!(Random.Range(0, 45) == 0))
                     {
                         Destroy(gameObject);
                     } else
@@ -110,9 +110,9 @@ public class Wildebeest : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.Contains("Grass") && energy <= 100f)
+        if (other.gameObject.name.Contains("Grass") && energy <= 100f && (other.gameObject.GetComponent<Grass>().growthBeforeAte < other.gameObject.GetComponent<Grass>().growth-10 || other.gameObject.GetComponent<Grass>().growth >= 20f))
         {
-            energy += other.gameObject.GetComponent<Grass>().GiveFood(15);
+            energy += other.gameObject.GetComponent<Grass>().GiveFood(20);
         } else if (other.gameObject.name.Contains("Disease") || (other.gameObject.name.Contains("Wildebeest") && other.gameObject.GetComponent<Wildebeest>().isSick) || (other.gameObject.name.Contains("Buffalo") && other.gameObject.GetComponent<Buffalo>().isSick))
         {
             isSick = true;

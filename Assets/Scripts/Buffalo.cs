@@ -6,7 +6,7 @@ public class Buffalo : MonoBehaviour
 {
     private readonly float moveSpeed = 1f;
     private readonly float ageToReproduce = 60f;
-    private readonly float energyToReproduce = 101f;
+    private readonly float energyToReproduce = 100f;
     private readonly float minEnergyToStayAlive = 0f;
     private readonly float energyDepletionRate = 1.5f;
 
@@ -64,7 +64,7 @@ public class Buffalo : MonoBehaviour
                 timeSinceSick += 0.1f;
                 if (timeSinceSick >= timeUntilDieFromSickness)
                 {
-                    if (!(Random.Range(0, 40) == 0))
+                    if (!(Random.Range(0, 45) == 0))
                     {
                         Destroy(gameObject);
                     }
@@ -101,9 +101,9 @@ public class Buffalo : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name.Contains("Grass") && energy < 100f)
+        if (other.gameObject.name.Contains("Grass") && energy < 100f && (other.gameObject.GetComponent<Grass>().growthBeforeAte < other.gameObject.GetComponent<Grass>().growth || other.gameObject.GetComponent<Grass>().growth >= 70f))
         {
-            energy += other.gameObject.GetComponent<Grass>().GiveFood(20);
+            energy += other.gameObject.GetComponent<Grass>().GiveFood(10);
         }
         else if (other.gameObject.name.Contains("Disease") || (other.gameObject.name.Contains("Wildebeest") && other.gameObject.GetComponent<Wildebeest>().isSick) || (other.gameObject.name.Contains("Buffalo") && other.gameObject.GetComponent<Buffalo>().isSick))
         {
